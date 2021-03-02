@@ -1,6 +1,5 @@
 <?php
     session_start();
-    session_unset();
 
     require("mysqli_connect.php");
     
@@ -16,8 +15,13 @@
       $stmt->execute();
       
       if($result = $stmt->get_result()){
-        $_SESSION['login'] = $username;
-        header("Location: order.php");
+
+        $row = $result->fetch_assoc();
+        if($row['password'] == $password){
+          $_SESSION['login'] = $username;
+          $_SESSION['userid'] = $row['userID'];
+          header("Location: order.php");
+        }        
       }
       else{
         echo "<p style='color: red;'>Failed</p>";
@@ -26,4 +30,5 @@
     else{
 
     }
+    $conn->close();
 ?>

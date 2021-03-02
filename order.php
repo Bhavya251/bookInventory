@@ -4,6 +4,7 @@
     require("mysqli_connect.php");
 
     if(isset($_SESSION['login'])){
+        
         $stmt = $conn->prepare("select * from books");
 
         $stmt->execute();
@@ -29,6 +30,7 @@
             echo "<script>alert('Please enter numeric value');</script>";
         }
         else{
+            $_SESSION['bookid'] = $_POST['buyID'];
             header("Location: checkout.php");
         }
     }
