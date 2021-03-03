@@ -1,3 +1,39 @@
+<?php
+    session_start();
+    session_unset();
+    
+    require("mysqli_connect.php");
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $username = mysqli_real_escape_string($conn, $_POST['username']);
+      $password = mysqli_real_escape_string($conn, $_POST['password']);
+      $password = md5($password);
+
+
+      $stmt = $conn->prepare("select * from users where username = ? and password = ?");
+
+      $stmt->bind_param("ss", $username, $password);
+      $stmt->execute();
+      
+      if($result = $stmt->get_result()){
+
+        $row = $result->fetch_assoc();
+        if($row['password'] == $password){
+          $_SESSION['login'] = $username;
+          $_SESSION['userid'] = $row['userID'];
+          header("Location: order.php");
+        }        
+      }
+      else{
+        echo "<p style='color: red;'>Failed</p>";
+      }
+    }
+    else{
+
+    }
+    $conn->close();
+?>
+
 <html>
     <head>
         <title>Book Inventory</title>
@@ -11,7 +47,7 @@
         <div class="card mx-auto" style="width: 25rem; margin-top: 80px;">	  
                 <div class="card-body">
                     <p class="card-text">
-                        <form action="login.php" method="POST">
+                        <form action="index.php" method="POST">
 
                                 <label for="Username">Username:</label>
                                 <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required/>

@@ -21,7 +21,7 @@
             $stmt->bind_param("ssssss", $fullname, $address, $postal, $email, $username,$password);
 
             if($stmt->execute()){
-                header("Location: index.html");
+                header("Location: index.php");
             }
             else{
                 echo "<p style='color: red;'>Failed</p>";

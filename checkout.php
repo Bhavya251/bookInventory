@@ -27,7 +27,7 @@
         }
     }
     else{
-        header("Location: index.html");
+        header("Location: index.php");
     }
 
     $conn->close();
@@ -43,7 +43,26 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>        
     </head>
     <body>
-        <div class="card mx-auto" style="width: 25rem; margin-top: 80px;">	  
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Book Inventory</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="order.php">Home <span class="sr-only">(current)</span></a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addBook.php">Add Book</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <a href="index.php">Sign Out</a>
+                </span>
+            </div>
+        </nav>
+        <div class="card mx-auto" style="width: 25rem; margin-top: 40px; margin-bottom: 40px;">	  
             <div class="card-body">
                 <p class="card-text">
                     <form action="final.php" method="POST">
